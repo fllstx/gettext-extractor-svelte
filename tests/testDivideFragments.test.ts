@@ -717,15 +717,15 @@ describe('Testing parsing of JavaScript in Svelte with HTML', () => {
   test('Element with attribute and child', () => {
     const svelteFile = i`
       <Compontent attribute={'Foo'}>{'Bar'}</Compontent>
-      <Compontent attribute={'Baz'}><p>{'Bax'}<p></Compontent>
+      <Compontent attribute={'Baz'} disabled><p>{'Bax'}<p></Compontent>
     `;
     expect(svelteFragmentDivider(svelteFile)).toEqual({
       htmlFragments: [
         {
-          fragment: `<Compontent attribute={'Foo'}>{'Bar'}</Compontent>\n<Compontent attribute={'Baz'}><p>{'Bax'}<p></Compontent>`,
+          fragment: `<Compontent attribute={'Foo'}>{'Bar'}</Compontent>\n<Compontent attribute={'Baz'} disabled><p>{'Bax'}<p></Compontent>`,
           startLine: 1,
           startChar: 0,
-          endChar: 107,
+          endChar: 116,
         },
       ],
       scriptInHTMLFragments: [
@@ -750,8 +750,8 @@ describe('Testing parsing of JavaScript in Svelte with HTML', () => {
         {
           fragment: "'Bax'",
           startLine: 2,
-          startChar: 85,
-          endChar: 90,
+          startChar: 94,
+          endChar: 99,
         },
       ],
     });

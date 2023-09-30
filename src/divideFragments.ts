@@ -128,7 +128,13 @@ function getChildFragment(child: TemplateNode, svelteFile: string): SvelteCodeFr
     return children;
   }
   if (child.type === 'Attribute') {
-    return child.value.flatMap((node: TemplateNode) => getChildFragment(node, svelteFile));
+    if (Array.isArray(child.value)) {
+      return child.value.flatMap((node: TemplateNode) => getChildFragment(node, svelteFile));
+    } else {
+      /* value might also be e.g. boolean
+       * Example: <input disabled /> */
+      // Nothing to do here!
+    }
   }
   if (['Binding'].includes(child.type)) {
     if (child.expression.type === 'Literal') {
